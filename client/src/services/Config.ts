@@ -55,10 +55,14 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        // Add token refresh logic here if needed
-        // const newToken = await refreshToken();
-        // useUserStore.getState().setUserData({ accessToken: newToken });
-        // return axiosInstance(originalRequest);
+        const newToken = await refreshToken();
+        useUserStore
+          .getState()
+          .setUserData({
+            accessToken: newToken.accessToken,
+            expiresIn: newToken.expiresIn,
+          });
+        return axiosInstance(originalRequest);
       } catch (refreshError) {
         useUserStore.getState().clearUserData();
         return Promise.reject(refreshError);
@@ -68,5 +72,27 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+/**
+ * Refresh the access token using the refresh token stored in the user store.
+ * Updates the user store with the new access token and expiry.
+ */
+export const refreshToken = async () => {
+  const { user, setUserData, clearUserData } = useUserStore.getState();
+  if (!user?.refreshToken) throw new Error('No refresh token available');
+  try {
+    const response = await axiosInstance.post('/api/auth/refresh', {
+      refreshToken: user.refreshToken,
+    });
+    setUserData({
+      accessToken: response.data.accessToken,
+      expiresIn: response.data.expiresIn,
+    });
+    return response.data;
+  } catch (error) {
+    clearUserData();
+    throw error;
+  }
+};
 
 export default axiosInstance;

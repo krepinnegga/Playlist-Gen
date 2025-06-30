@@ -2,6 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, UserRound } from 'lucide-react';
 import { useState } from 'react';
 import Logo from '../assets/playlistgenLogo.png';
+import { useSpotifyAuth } from '../hooks/useSpotifyAuth';
+import { useUserStore } from '../store';
 
 const navLinks = [
   { name: 'Home', to: '/' },
@@ -11,8 +13,10 @@ const navLinks = [
 const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { login, isLoading } = useSpotifyAuth();
+  const { user, clearUserData } = useUserStore();
 
-  const isAuthenticated = false;
+  const isAuthenticated = Boolean(user?.accessToken);
 
   return (
     <nav className='w-full bg-spotify-black text-spotify-white fixed z-50 shadow-spotify-md'>
@@ -51,14 +55,15 @@ const Navbar = () => {
               {!isAuthenticated ? (
                 <button
                   className='bg-spotify-white text-spotify-black rounded-full px-6 py-2 font-bold hover:scale-105 transition-transform duration-200'
-                  onClick={() => {}}
+                  onClick={login}
+                  disabled={isLoading}
                 >
-                  Log in
+                  {isLoading ? 'Loading...' : 'Login with spotify'}
                 </button>
               ) : (
                 <button
                   className='flex items-center gap-2 bg-spotify-gray-800 hover:bg-spotify-gray-700 rounded-full px-4 py-2 transition-colors duration-200'
-                  onClick={() => {}}
+                  onClick={clearUserData}
                 >
                   <UserRound size={20} />
                   <span className='font-medium'>Log out</span>
@@ -93,14 +98,15 @@ const Navbar = () => {
             {!isAuthenticated ? (
               <button
                 className='bg-spotify-white text-spotify-black rounded-full px-4 py-1.5 text-sm font-bold'
-                onClick={() => {}}
+                onClick={login}
+                disabled={isLoading}
               >
-                Log in
+                {isLoading ? 'Loading...' : 'Login with spotify'}
               </button>
             ) : (
               <button
                 className='flex items-center gap-1 bg-spotify-gray-800 rounded-full px-3 py-1.5'
-                onClick={() => {}}
+                onClick={clearUserData}
               >
                 <UserRound size={16} />
                 <span className='text-sm font-medium'>Log out</span>

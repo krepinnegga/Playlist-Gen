@@ -9,10 +9,9 @@ interface User {
   email?: string;
   accessToken?: string;
   refreshToken?: string;
-  // Add other user properties as needed
+  expiresIn?: number;
 }
 
-// Define the store's state and actions
 interface UserStoreState {
   user: User | null;
   setUserData: (data: Partial<User>) => void;
@@ -37,7 +36,6 @@ const cookieStorage = {
   },
 };
 
-// Create the store with TypeScript typing
 const useUserStore = create<UserStoreState>()(
   persist(
     set => ({
@@ -51,7 +49,7 @@ const useUserStore = create<UserStoreState>()(
     {
       name: 'user', // Cookie name
       storage: createJSONStorage(() => cookieStorage),
-      partialize: state => ({ user: state.user }), // Only persist the user field
+      partialize: state => ({ user: state.user }),
     }
   )
 );

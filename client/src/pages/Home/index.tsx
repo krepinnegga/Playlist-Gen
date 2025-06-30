@@ -1,10 +1,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Layout from '../../components/Layout';
-import { ArrowRight, Music, Wand2, ImageIcon, Sparkles } from 'lucide-react';
+import { ArrowRight, Music, Wand2, ImageIcon, Sparkles, X } from 'lucide-react';
+import { useSpotifyCallback } from '../../hooks/useSpotifyCallback';
 
 const Home = () => {
   const ref = useRef(null);
+  const { loading, error, setError } = useSpotifyCallback();
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
@@ -36,6 +39,26 @@ const Home = () => {
 
   return (
     <Layout>
+      {/* Spotify Callback Loading/Error */}
+      {loading && (
+        <div className='fixed top-0 left-0 w-full z-50 bg-spotify-black text-spotify-brand text-center py-2'>
+          Authenticating with Spotify...
+        </div>
+      )}
+      {error && (
+        <div className='fixed top-0 left-0 w-full z-50 bg-red-700 text-white py-3 px-4'>
+          <div className='max-w-7xl mx-auto flex items-center justify-between gap-4'>
+            <span className='flex-1 text-center'>{error}</span>
+            <button
+              onClick={() => setError(null)}
+              className='p-1 hover:bg-red-800 rounded-full transition-colors flex-shrink-0'
+              aria-label='Dismiss error'
+            >
+              <X className='w-4 h-4' />
+            </button>
+          </div>
+        </div>
+      )}
       {/* Hero Section with Parallax Effect */}
       <section
         ref={ref}
