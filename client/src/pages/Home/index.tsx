@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Layout from '../../components/Layout';
-import { ArrowRight, Music, Wand2, ImageIcon, Sparkles, X } from 'lucide-react';
+import { ArrowRight, Music, Wand2, ImageIcon, Sparkles } from 'lucide-react';
 // import { useSpotifyCallback } from '../../hooks/useSpotifyCallback';
 
 const Home = () => {
