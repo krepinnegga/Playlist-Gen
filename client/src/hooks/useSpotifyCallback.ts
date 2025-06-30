@@ -28,7 +28,7 @@ export function useSpotifyCallback() {
           refreshToken: response.data.refreshToken,
           expiresIn: response.data.expiresIn,
         });
-        window.history.pushState({}, '', '/');
+        // window.history.pushState({}, '', '/');
       }
     } catch (err: unknown) {
       if (
@@ -51,7 +51,7 @@ export function useSpotifyCallback() {
       }
     } finally {
       setLoading(false);
-      window.history.pushState({}, '', '/');
+      //window.history.pushState({}, '', '/');
     }
   }, [setUserData]);
 
