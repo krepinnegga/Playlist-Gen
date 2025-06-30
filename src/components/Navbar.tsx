@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, UserRound } from 'lucide-react';
 import { useState } from 'react';
-import Logo from '../assets/2024-spotify-full-logo/Spotify_Full_Logo_RGB_Green.png';
+import Logo from '../assets/playlistgenLogo.png';
 
 const navLinks = [
   { name: 'Home', to: '/' },
@@ -23,7 +23,11 @@ const Navbar = () => {
             <div className='flex items-center justify-between w-full py-4'>
               {/* Logo */}
               <Link to='/' className='flex items-center'>
-                <img src={Logo} alt='Spotify Playlist Gen' className='h-10' />
+                <img
+                  src={Logo}
+                  alt='Spotify Playlist Gen'
+                  className='h-16 w-16 rounded-md'
+                />
               </Link>
 
               {/* Nav Links */}
@@ -82,7 +86,7 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link to='/' className='flex items-center'>
-              <img src={Logo} alt='Spotify Playlist Gen' className='h-8' />
+              <img src={Logo} alt='Spotify Playlist Gen' className='hidden' />
             </Link>
 
             {/* Auth Button */}

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import Logo from '../assets/2024-spotify-full-logo/Spotify_Full_Logo_RGB_Green.png';
+import Logo from '../assets/playlistgenLogo.png';
 
 const navLinks = [
   { name: 'Home', to: '/' },
@@ -21,7 +21,11 @@ const Footer = () => {
             to='/'
             className='flex items-center justify-center lg:justify-start'
           >
-            <img src={Logo} alt='Spotify Playlist Gen' className='h-8' />
+            <img
+              src={Logo}
+              alt='Playlist Gen'
+              className='h-14 w-14 rounded-md'
+            />
           </Link>
 
           {/* Nav Links (Tablet/Mobile) */}
