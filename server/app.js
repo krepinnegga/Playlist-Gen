@@ -13,23 +13,41 @@ const app = express();
 const allowedOrigins = [
   'https://playlist-gen-liart.vercel.app',
   'http://localhost:5173',
+  'http://172.20.10.2:5173',
 ];
 
 // Apply CORS middleware
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
+
+      // Special case for local development
+      if (process.env.NODE_ENV === 'development') {
+        const isLocalhost =
+          origin.startsWith('http://localhost:') ||
+          origin.startsWith('http://127.0.0.1:');
+        if (isLocalhost) {
+          return callback(null, true);
+        }
+      }
+
+      return callback(new Error('Not allowed by CORS'));
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   })
 );
+
+// Handle preflight requests
+app.options('*', cors());
 
 // Middlewares
 app.use(bodyParser.json());
