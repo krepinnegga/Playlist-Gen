@@ -52,7 +52,7 @@ const Footer = () => {
           </p>
 
           <p className='text-spotify-gray-500 text-xs md:text-sm font-medium mt-8 lg:mt-auto'>
-            Copyright 2025. All Rights Reserved (we are not associated with
+            Copyright 2025. All Rights Reserved (we are not affiliated with
             Spotify)
           </p>
         </div>

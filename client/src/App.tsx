@@ -3,6 +3,7 @@ import { ThemeProvider } from './contexts/ThemeProvider';
 import Home from './pages/Home';
 import PlaylistGen from './pages/PlayListGen';
 import ErrorPage from './pages/Error';
+import PrivateRoutes from './HOC/PrivateRoutes';
 
 function App() {
   const router = createBrowserRouter([
@@ -13,7 +14,11 @@ function App() {
     },
     {
       path: '/playlist-gen',
-      element: <PlaylistGen />,
+      element: (
+        <PrivateRoutes>
+          <PlaylistGen />
+        </PrivateRoutes>
+      ),
       errorElement: <ErrorPage />,
     },
   ]);
