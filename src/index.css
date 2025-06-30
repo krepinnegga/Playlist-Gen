@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Font Face (Circular is Spotify's official font) */
+@font-face {
+  font-family: 'Circular';
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.12.1/fonts/circular-light.woff2')
+    format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.12.1/fonts/circular-book.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.12.1/fonts/circular-medium.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.12.1/fonts/circular-bold.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.12.1/fonts/circular-black.woff2')
+    format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Base Styles */
+body {
+  @apply bg-spotify-black text-spotify-white font-sans;
+}
+
+/* Typography */
+.heading-display {
+  @apply text-display-lg font-bold;
+}
+
+.heading-1 {
+  @apply text-display-md font-bold;
+}
+
+.heading-2 {
+  @apply text-heading-lg font-bold;
+}
+
+.heading-3 {
+  @apply text-heading-md font-bold;
+}
+
+.heading-4 {
+  @apply text-heading-sm font-bold;
+}
+
+.body-large {
+  @apply text-body-lg;
+}
+
+.body-medium {
+  @apply text-body-md;
+}
+
+.body-small {
+  @apply text-body-sm;
+}
+
+.caption {
+  @apply text-caption;
+}
+
+/* Components */
+.card {
+  @apply bg-spotify-gray-900 rounded-lg p-6 shadow-spotify-md;
+}
+
+.card-hover {
+  @apply transition-all duration-200 hover:bg-spotify-gray-800 hover:shadow-spotify-lg;
+}
+
+.button-primary {
+  @apply bg-spotify-brand text-spotify-black font-bold rounded-full px-6 py-3 
+         transition-all duration-200 hover:bg-spotify-green-light hover:scale-105 
+         focus:outline-none focus:ring-2 focus:ring-spotify-green-light focus:ring-opacity-50;
+}
+
+.button-secondary {
+  @apply bg-transparent border border-spotify-gray-600 text-spotify-white font-bold rounded-full px-6 py-3 
+         transition-all duration-200 hover:border-spotify-white hover:bg-spotify-gray-800 
+         focus:outline-none focus:ring-2 focus:ring-spotify-white focus:ring-opacity-50;
+}
+
+.button-tertiary {
+  @apply bg-spotify-gray-700 text-spotify-white font-bold rounded-full px-6 py-3 
+         transition-all duration-200 hover:bg-spotify-gray-600 
+         focus:outline-none focus:ring-2 focus:ring-spotify-gray-400 focus:ring-opacity-50;
+}
+
+/* Navigation */
+.nav-item {
+  @apply text-spotify-gray-400 hover:text-spotify-white transition-colors duration-200;
+}
+
+.nav-item-active {
+  @apply text-spotify-white;
+}
+
+/* Forms */
+.input-field {
+  @apply bg-spotify-gray-800 border border-spotify-gray-700 rounded-md px-4 py-3 
+         text-spotify-white focus:outline-none focus:ring-2 focus:ring-spotify-brand 
+         focus:border-transparent placeholder-spotify-gray-500;
+}
+
+/* Utility Classes */
+.transition-slow {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.transition-fast {
+  @apply transition-all duration-150 ease-in-out;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
