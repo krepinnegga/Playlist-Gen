@@ -11,7 +11,7 @@ export default defineConfig({
     strictPort: true,
     allowedHosts: [
       'e069a2f1f5fe.ngrok-free.app',
-      'playlist-gen-liart.vercel.app',
+      'playlist-gen-henna.vercel.app',
     ],
   },
   resolve: {
