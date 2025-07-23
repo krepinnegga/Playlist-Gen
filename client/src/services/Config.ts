@@ -51,17 +51,15 @@ axiosInstance.interceptors.response.use(
   async (error: AxiosError<ApiErrorResponse>) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401) {
       originalRequest._retry = true;
 
       try {
         const newToken = await refreshToken();
-        useUserStore
-          .getState()
-          .setUserData({
-            accessToken: newToken.accessToken,
-            expiresIn: newToken.expiresIn,
-          });
+        useUserStore.getState().setUserData({
+          accessToken: newToken.accessToken,
+          expiresIn: newToken.expiresIn,
+        });
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         useUserStore.getState().clearUserData();

@@ -14,6 +14,7 @@ const allowedOrigins = [
   'https://playlist-gen-liart.vercel.app',
   'http://localhost:5173',
   'http://172.20.10.2:5173',
+  'https://e069a2f1f5fe.ngrok-free.app',
 ];
 
 // Apply CORS middleware

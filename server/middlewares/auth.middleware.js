@@ -19,6 +19,11 @@ export const verifyToken = async (req, res, next) => {
   try {
     const spotifyApi = getSpotifyApi({ accessToken: token });
     await spotifyApi.getMe(); // Verify token is valid
+
+    // Attach the verified token and Spotify API instance to the request
+    req.accessToken = token;
+    req.spotifyApi = spotifyApi;
+
     next();
   } catch (error) {
     console.error('Token verification failed:', error);

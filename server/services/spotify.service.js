@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 export function getSpotifyApi({ accessToken, refreshToken } = {}) {

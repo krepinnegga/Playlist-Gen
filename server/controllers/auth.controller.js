@@ -8,6 +8,8 @@ export const handleLogin = async (req, res, next) => {
       'ugc-image-upload',
       'user-read-private',
       'user-read-email',
+      'playlist-read-collaborative',
+      'playlist-modify-private',
     ];
     const spotifyApi = getSpotifyApi();
     const authorizeURL = spotifyApi.createAuthorizeURL(scopes, null, true);

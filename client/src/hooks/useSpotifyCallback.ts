@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useUserStore } from '../store';
 import axiosInstance from '../services/Config';
 import type { AxiosError } from 'axios';
@@ -7,19 +7,22 @@ export function useSpotifyCallback() {
   const { setUserData } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hasExecuted = useRef(false); // Track execution
 
-  // Extract code from URL
   const getCodeFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
     return params.get('code');
   };
 
-  // Function to exchange code for tokens
+  const code = getCodeFromUrl();
+
   const handleCallback = useCallback(async () => {
-    const code = getCodeFromUrl();
-    if (!code) return;
+    if (!code || hasExecuted.current) return; // Skip if already executed
+    hasExecuted.current = true; // Mark as executed
+
     setLoading(true);
     setError(null);
+
     try {
       const response = await axiosInstance.post('/api/auth/callback', { code });
       if (response?.data) {
@@ -28,7 +31,7 @@ export function useSpotifyCallback() {
           refreshToken: response.data.refreshToken,
           expiresIn: response.data.expiresIn,
         });
-        // window.history.pushState({}, '', '/');
+        window.history.pushState({}, '', '/'); // Clean URL once
       }
     } catch (err: unknown) {
       if (
@@ -51,17 +54,13 @@ export function useSpotifyCallback() {
       }
     } finally {
       setLoading(false);
-      //window.history.pushState({}, '', '/');
     }
-  }, [setUserData]);
+  }, [setUserData, code]);
 
-  // Optionally, auto-run on mount if code is present
+  // Run once on mount if code exists
   useEffect(() => {
-    if (getCodeFromUrl()) {
-      handleCallback();
-    }
-    // eslint-disable-next-line
-  }, []);
+    if (code) handleCallback();
+  }, [code, handleCallback]);
 
-  return { handleCallback, loading, error, setError };
+  return { loading, error, setError };
 }

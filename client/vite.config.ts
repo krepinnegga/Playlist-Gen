@@ -9,6 +9,10 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     strictPort: true,
+    allowedHosts: [
+      'e069a2f1f5fe.ngrok-free.app',
+      'playlist-gen-liart.vercel.app',
+    ],
   },
   resolve: {
     alias: {

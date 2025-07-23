@@ -1,12 +1,12 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Layout from '../../components/Layout';
-import { ArrowRight, Music, Wand2, ImageIcon, Sparkles } from 'lucide-react';
-// import { useSpotifyCallback } from '../../hooks/useSpotifyCallback';
+import { ArrowRight, Music, Wand2, ImageIcon, Sparkles, X } from 'lucide-react';
+import { useSpotifyCallback } from '../../hooks/useSpotifyCallback';
 
 const Home = () => {
   const ref = useRef(null);
-  // const { loading, error, setError } = useSpotifyCallback();
+  const { loading, error, setError } = useSpotifyCallback();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -40,7 +40,7 @@ const Home = () => {
   return (
     <Layout>
       {/* Spotify Callback Loading/Error */}
-      {/* {loading && (
+      {loading && (
         <div className='fixed top-0 left-0 w-full z-50 bg-spotify-black text-spotify-brand text-center py-2'>
           Authenticating with Spotify...
         </div>
@@ -58,7 +58,7 @@ const Home = () => {
             </button>
           </div>
         </div>
-      )} */}
+      )}
       {/* Hero Section with Parallax Effect */}
       <section
         ref={ref}
@@ -226,7 +226,7 @@ const Home = () => {
             </p>
             <a
               href='/playlist-gen'
-              className='bg-spotify-brand hover:bg-spotify-green-light text-spotify-black font-bold rounded-full px-8 py-4 flex items-center gap-2 transition-all duration-200 hover:scale-105 mx-auto w-fit'
+              className=' bg-spotify-brand hover:bg-spotify-green-light text-spotify-black font-bold rounded-full px-8 py-4 flex items-center gap-2 transition-all duration-200 hover:scale-105 mx-auto w-fit'
             >
               Start Creating Now <ArrowRight className='w-5 h-5' />
             </a>
