@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import {
   generatePlaylistRecommendations,
-  generateCoverArt,
-  createPlaylist,
+  getUserSpotifyPlaylists,
+  createOrUpdatePlaylist,
 } from '../controllers/playlist.controller.js';
 import { setCorsHeaders, verifyToken } from '../middlewares/auth.middleware.js';
 
@@ -16,20 +16,20 @@ router.post(
   generatePlaylistRecommendations
 );
 
-// Generate cover art description using Gemini AI
-router.post(
-  '/cover-art',
+// Get existing playlist
+router.get(
+  '/',
   setCorsHeaders,
   verifyToken, // Add token verification
-  generateCoverArt
+    getUserSpotifyPlaylists
 );
 
 // Create and save playlist to Spotify
 router.post(
-  '/create',
+  '/save',
   setCorsHeaders,
   verifyToken, // Add token verification
-  createPlaylist
+    createOrUpdatePlaylist
 );
 
 export default router;

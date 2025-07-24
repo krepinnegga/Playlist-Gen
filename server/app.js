@@ -14,7 +14,7 @@ const allowedOrigins = [
   'https://playlist-gen-henna.vercel.app',
   'http://localhost:5173',
   'http://172.20.10.2:5173',
-  'https://e069a2f1f5fe.ngrok-free.app',
+  'https://7907a6075b2c.ngrok-free.app',
 ];
 
 // Apply CORS middleware
